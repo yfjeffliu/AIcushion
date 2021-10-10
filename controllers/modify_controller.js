@@ -67,7 +67,8 @@ module.exports = class Member {
                 res.json({
                     result: {
                         status: "登入失敗。",
-                        err: "請輸入正確的帳號或密碼。"
+                        err: "請輸入正確的帳號或密碼。",
+			sta:"fail"
                     }
                 })
             } else if (check.checkNull(rows) === false) {
@@ -78,10 +79,13 @@ module.exports = class Member {
                     data: rows[0].id
                 }, config.secret);
                 res.setHeader('token', token);
+                
                 res.json({
                     result: {
                         status: "登入成功。",
                         loginMember: "歡迎 " + rows[0].name + " 的登入！",
+			sta:"success",
+			name:rows[0].name
                         // token: token
                     }
                 })

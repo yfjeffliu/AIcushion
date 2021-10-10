@@ -1,5 +1,5 @@
 const db = require('./connection_db');
-
+const db2 = require('./connection_db2');
 module.exports = function register(memberData) {
     let result = {};
     return new Promise((resolve, reject) => {
@@ -31,6 +31,10 @@ module.exports = function register(memberData) {
                     }
                     // 若寫入資料庫成功，則回傳給clinet端下：
                     result.status = "註冊成功。"
+		command = "CREATE TABLE " + memberData.name + "(`DATE` date DEFAULT NULL,`TIME` time DEFAULT NULL,`result` int(20) NOT NULL)"
+		    db2.query(command ,function(err,rows){})
+		    command = "INSERT INTO current (user,DATE,TIME,a,b,c,d,e,f,g,h,i,result) VALUES('" + memberData.name + "',NULL,NULL,0,0,0,0,0,0,0,0,0,0)"
+		   db2.query(command,function(err,rows){})
                     result.registerMember = memberData;
                     resolve(result);
                 })

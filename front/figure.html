@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+   <meta charset="UTF-8">
+   <script src="./node_modules/jquery/dist/jquery.js"></script>
+   <script src="./response.js"></script>
+   
+   <body>
+      <div class="radio">
+	 <input id=showfig type="button" value="Let me see see~">
+      </div>
+
+      <div id="figure">
+	      <img src="imager.png">
+	      <!--<img src="pie.png">-->
+      	      <img src="pie_nonzero.png">
+      </div>
+
+      	 <select id="pets">
+    	 	<option value="">請選擇時間</option>
+    	 	<option value="dog">Dog</option>
+    	 	<option value="cat" selected>Cat</option>
+    	 	<option value="spider" disabled>Spider</option>
+    	 	<option value="goldfish">Goldfish</option>
+      	</select>
+
+      <form id="ajax-form">
+  	first name: <input type="text" name="fname"><br>
+  	last name: <input type="text" name="lname"><br>
+  	<button type="submit">submit via ajax</button>
+	</form>
+
+	<div id="ajax-output"></div>
+   </body>
+   <!--<script src="./node.js"></script>-->
+</html>

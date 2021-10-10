@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<!--<?php
+   //Connection with database
+   $db = mysqli_connect('localhost','root','capoo','TEST');
+   or die("Connection failed: " .mysql_connect_error());
+   ?>-->
+
+<html>
+   <meta charset="UTF-8">
+   <!--<meta http-equiv="refresh" content="20">	//每隔20秒頁面自動刷新一次-->
+   <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+   <script src="./Javascript.js"></script>
+   <script src="./Javascript_time.js"></script>
+   <link rel="stylesheet" type="text/css" href="style.css">
+   
+   <body>
+        <!--<form action="./test" method="get">
+	      <input type = "text" name"usr">
+		<button type="submit">submit via get</button>
+        </form>-->
+
+	<!--<form id="ajax-form">
+  		first name: <input type="text" name="fname"><br>
+  		last name: <input type="text" name="lname"><br>
+  		<button type="submit">submit via ajax</button>
+	</form>-->
+	<div id="ajax-output"></div>
+	<img id="chair" src="./chair.png">
+	<form id="ajax_form">
+		<!--<div class="Username">
+			 User name: <input type="text" name="name"> <br>
+		</div>-->
+	   	<div id="time_interval">
+	 		選擇開始時間：
+			<select id="time_s " name ="start_date">
+	      	   		<option value="Choose time" selected disabled>--Choose time--</option>
+		   		<!--<?php	
+		   		// Fetch data from database and display in drop down list
+        				$sql = "SELECT TIME FROM data2";	   
+					$results = mysqli_query($db, $sql);
+					while ($row = mysqli_fetch_array($results))
+        				{
+			   			echo "<option>". $row['TIME'] ."</option> <br/>";  // displaying data in option menu
+					};
+				?>-->
+	      			<!--<option value="2021-07-12" selected >20210712</option>
+	      			<option value="dog" disabled >DOG</option>
+	      			<option value="2021-07-13" >20210713</option>
+				<option value="2021-07-16" >20210716</option>-->
+	 		</select>
+			<input type="time" name="start_time" value="08:00:01"> <br>
+
+			選擇結束時間：
+			<select id="time_e" name="end_date">
+				<option value="Choose time" selected disabled >--Choose time-- </option>
+			</select>
+			<input type="time" name="end_time" value="23:59:59">
+	 	</div>
+		<button id=showfig type="summit"> Search </button>
+      	</form>
+
+	<div id="pressure_chart_title">目前坐姿</div>
+	<div id="pie_chart_title">歷史坐姿</div>
+
+      	<div id="figure">
+	      <div id="Warn"></div>
+	      <div id="bg_l">
+	      		<img id="pressure_chart" src="imager.png">
+	      </div>
+			<div id="direction_bg">
+				<div id="direction">
+				<div> 後</div>
+				<div> 前</div>
+				<div> 左</div>
+				<div> 右</div>
+				</div>
+				<div id="direction_img">
+				<img src="./arrow_top_up_direction.png">
+				<img src="./arrow_down_direction.png">
+				<img src="./arrow_back_left_direction.png">
+				<img src="./arrow_forward_right.png">
+				</div>
+			</div>
+	      <img id="pie_chart" src="pie_nonzero.png">
+	</div>
+
+      <div class="loader loader-default is-active" data-text data-blink ></div> 
+	
+      <div id=bg_set_time>
+      	<div id=word>——— 設定久坐提醒時間 ———</div>
+      	<div id=timer>
+      <!--我們設置了onkeyup以及ng-pattern的正規式，來避免使用者隨便輸入數字以外的東西導致程式當機，並且我們限制分和秒最大長度為2位數-->
+      	   
+             <div>
+      		<input
+        	onkeyup="value=value.replace(/[^\d]/g,'') "
+        	ng-pattern="/[^a-zA-Z]/"   
+        	value= 0
+        	maxlength="2"
+        	onblur="setHour()"
+        	onchange = "checkNumber(value,id)"
+        	id = "setHour";
+      		></input>
+	     </div>
+             &nbsp:&nbsp
+	     <div>
+		<input
+        	onkeyup="value=value.replace(/[^\d]/g,'') "
+        	ng-pattern="/[^a-zA-Z]/"   
+        	value= 0
+        	maxlength="2"
+        	onblur="setMinute()"
+        	id = "setMinute";
+      		></input>
+	     </div>
+	     &nbsp:&nbsp
+	     <div>
+      		<input
+        	onkeyup="value=value.replace(/[^\d]/g,'') "
+        	ng-pattern="/[^a-zA-Z]/"   
+        	value= 0
+        	maxlength="2"
+        	onblur="setSecond()"
+        	id = "setSecond";
+		></input>
+	     </div>
+      	</div>
+    </div>
+    <div >
+        <button    
+        class="btn btn-success"
+        id = "start"
+        onclick = "startCounting()"
+        >開始</button>
+        <button
+        class="btn btn-primary"
+        onclick = "addMinute()"
+        id= "reset"
+        >增加一分鐘</button>
+    </div>
+   </body>
+</html>
